@@ -1,6 +1,6 @@
 echo off
 echo Copying config files to %HOME%
-cp _gvimrc _vimperatorrc _vimrc nsis.vim pythonConfig.vim %HOME%
+cp _bashrc fixGit.sh _gvimrc _vimperatorrc _vimrc nsis.vim pythonConfig.vim %HOME%
 set is64='%programfiles(x86)%'
 if NOT "%is64%"=="" (
   echo Running 64 bits
