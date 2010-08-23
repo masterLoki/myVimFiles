@@ -1,0 +1,25 @@
+"2.3.1 (created: 2010/04/07 18:56:53)
+
+command! -nargs=* Deli emenu Delicious.Save a new Bookmark...
+command! -nargs=* DownSelect emenu Tools.FlashGot.FlashGot Selection
+command! -nargs=* Google tabopen google <args>
+command! -nargs=* Translate open http://translate.google.com/#auto|en|<args>
+imap <C-v> <C-z><S-Insert><Esc>
+map <C-c> i<C-z><C-c><Esc><Esc>
+map s :Deli<Return>
+map X :DownSelect<Return>
+map x y<Esc>:Translate<Space><S-Insert><Return>
+map <C-S-P> :set<Space>private<Return>
+map <C-p> :set<Space>noprivate<Return>
+map S :Google<Space>
+map ñ <C-z><A-w><Esc>
+map Ñ <C-z><A-p><Esc>
+map e 6zi
+map E 6zo
+set guioptions=
+set nohlsearch
+set mainecoon=am
+set "runtimepath=C:\\Users\\masterLoki\\vimperator"
+source! "C:\\Users\\masterLoki\\_vimperatorrc.local"
+
+" vim: set ft=vimperator:
