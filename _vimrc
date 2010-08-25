@@ -48,10 +48,13 @@ map <A-S-h> <C-w><
 map <A-S-l> <C-w>>
 "}
 
-"Other Stuff {
+"Filetype assoc{
 autocmd BufNewFile,BufRead,BufEnter *py set omnifunc=pythoncomplete#Complete
 autocmd BufNewFile,BufRead,BufEnter *py so $HOME\pythonConfig.vim
 autocmd BufNewFile,BufRead,BufEnter *nsi so $HOME\nsis.vim
+"}
+
+"Other Stuff {
 map <F2>  :!sh -login -i<CR><CR>
 map <F3>  :lvimgrep 
 map <F4>  :TlistToggle<CR>
