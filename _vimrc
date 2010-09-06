@@ -50,8 +50,8 @@ map <A-S-l> <C-w>>
 
 "Filetype assoc{
 autocmd BufNewFile,BufRead,BufEnter *py set omnifunc=pythoncomplete#Complete
-autocmd BufNewFile,BufRead,BufEnter *py so ~/myVimFiles/pythonConfig.vim
-autocmd BufNewFile,BufRead,BufEnter *nsi so ~/myVimFiles/nsis.vim
+autocmd BufNewFile,BufRead,BufEnter *py so ~\myVimFiles.git\pythonConfig.vim
+autocmd BufNewFile,BufRead,BufEnter *nsi so ~\myVimFiles.git\nsis.vim
 "}
 
 "Other Stuff {
