@@ -16,6 +16,7 @@ set ignorecase
 set smartcase
 set hidden
 set enc=utf-8
+set updatetime=60000
 syntax on
 filetype plugin indent on
 "}
@@ -49,11 +50,14 @@ map <A-S-l> <C-w>>
 "}
 
 "Filetype assoc{
+autocmd BufRead,BufNewFile * let b:start_time=localtime()
 autocmd BufNewFile,BufRead,BufEnter *py set omnifunc=pythoncomplete#Complete
 autocmd BufNewFile,BufRead,BufEnter *py so ~\myVimFiles.git\pythonConfig.vim
 autocmd BufNewFile,BufRead,BufEnter *nsi so ~\myVimFiles.git\nsis.vim
 autocmd BufNewFile,BufRead,BufEnter *txt call CheckLang()
 autocmd BufNewFile,BufRead,BufEnter *tmp call CheckLang()
+autocmd BufNewFile,BufRead,BufEnter *tmp call CheckLang()
+autocmd CursorHold * call UpdateColorScheme()
 "}
 
 "My search in files function
@@ -109,6 +113,7 @@ function CheckLang()
   map N [s
   imap	<F6>  <ESC>:setlocal spell spelllang=es<CR>
   imap	<F7>  <ESC>:setlocal spell spelllang=en<CR>
+  call EndCheckLang()
 endfunction
 
 function EndCheckLang()
@@ -116,5 +121,29 @@ function EndCheckLang()
   unmap n
   unmap N
   unmap c
+endfunction
+"}
+"
+"Colorchange scheme{
+function! SetTimeOfDayColors()
+    let currentHour = strftime("%H")
+    if currentHour < 6 + 0
+      let colorScheme = "phd"
+    elseif currentHour < 12 + 0
+      let colorScheme = "pyte"
+    elseif currentHour < 18 + 0
+      let colorScheme = "proton"
+    else
+      let colorScheme = "twilight"
+    endif
+    execute "colorscheme " . colorScheme
+endfunction
+
+function! UpdateColorScheme()
+  if ((localtime() - b:start_time) >= 1800)
+    set statusline=%<%f\ %h%m%r%=%-20.(line=%l,col=%c%V,totlin=%L%)\%h%m%r%=%-40(,bytval=0x%B,%n%Y%)\ %{strftime(\"%c\")}%=0x%B\ %P
+    set statusline+=\ %{SetTimeOfDayColors()}
+    let b:start_time=localtime()
+  endif
 endfunction
 "}
