@@ -16,7 +16,6 @@ set ignorecase
 set smartcase
 set hidden
 set enc=utf-8
-set updatetime=60000
 syntax on
 filetype plugin indent on
 "}
@@ -30,6 +29,10 @@ set wildmode=list:longest
 "Tabs {
 map	<C-TAB>		gt
 map	<C-S-TAB>	gT
+"}
+
+"Dirs{
+set viewdir=~\vimfiles\view
 "}
 
 "Buffers Mappings {
@@ -51,11 +54,12 @@ map <A-S-l> <C-w>>
 
 "Filetype assoc{
 autocmd BufRead,BufNewFile * let b:start_time=localtime()
-autocmd BufNewFile,BufRead,BufEnter *py set omnifunc=pythoncomplete#Complete
+autocmd BufRead,BufNewFile * set foldmethod=indent
+autocmd BufWinEnter *.* silent loadview
+autocmd BufWinLeave *.* mkview!
 autocmd BufNewFile,BufRead,BufEnter *py so ~\myVimFiles.git\pythonConfig.vim
 autocmd BufNewFile,BufRead,BufEnter *nsi so ~\myVimFiles.git\nsis.vim
 autocmd BufNewFile,BufRead,BufEnter *txt call CheckLang()
-autocmd BufNewFile,BufRead,BufEnter *tmp call CheckLang()
 autocmd BufNewFile,BufRead,BufEnter *tmp call CheckLang()
 autocmd CursorHold * call UpdateColorScheme()
 "}
@@ -94,26 +98,16 @@ imap <F5> <Esc>:FufBuffer<CR>
 
 "Folds {
 set foldenable
-set foldmarker={,}
-set foldmethod=marker
 set foldlevel=100
-function SimpleFoldText() "{
-  return getline(v:foldstart).' '
-endfunction "}
-set foldtext=SimpleFoldText()
 "}
 
 "Languge correcting settings {
 function CheckLang()
-  map	<F6>  :setlocal spell spelllang=es<CR>
-  map	<F7>  :setlocal spell spelllang=en<CR>
+  map	<F6>  :setlocal spell spelllang=es<CR> :call MapsForCheck()<CR>
+  map	<F7>  :setlocal spell spelllang=en<CR> :call MapsForCheck()<CR>
   map <F8>  :call EndCheckLang()<CR>
-  map n  ]s
-  map c  z=
-  map N [s
-  imap	<F6>  <ESC>:setlocal spell spelllang=es<CR>
-  imap	<F7>  <ESC>:setlocal spell spelllang=en<CR>
-  call EndCheckLang()
+  imap	<F6>  <ESC>:setlocal spell spelllang=es<CR> :call MapsForCheck()<CR>
+  imap	<F7>  <ESC>:setlocal spell spelllang=en<CR> :call MapsForCheck()<CR>
 endfunction
 
 function EndCheckLang()
@@ -122,10 +116,16 @@ function EndCheckLang()
   unmap N
   unmap c
 endfunction
+
+function MapsForCheck()
+  map n  ]s
+  map c  z=
+  map N [s
+endfunction
 "}
 "
 "Colorchange scheme{
-function! SetTimeOfDayColors()
+function SetTimeOfDayColors()
     let currentHour = strftime("%H")
     if currentHour < 6 + 0
       let colorScheme = "phd"
@@ -139,8 +139,8 @@ function! SetTimeOfDayColors()
     execute "colorscheme " . colorScheme
 endfunction
 
-function! UpdateColorScheme()
-  if ((localtime() - b:start_time) >= 1800)
+function UpdateColorScheme()
+  if ((localtime() - b:start_time) >= 100)
     set statusline=%<%f\ %h%m%r%=%-20.(line=%l,col=%c%V,totlin=%L%)\%h%m%r%=%-40(,bytval=0x%B,%n%Y%)\ %{strftime(\"%c\")}%=0x%B\ %P
     set statusline+=\ %{SetTimeOfDayColors()}
     let b:start_time=localtime()
