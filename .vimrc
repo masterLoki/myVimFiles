@@ -59,6 +59,8 @@ autocmd BufWinEnter *.* silent loadview
 autocmd BufWinLeave *.* mkview!
 autocmd BufNewFile,BufRead,BufEnter *py so ~\myVimFiles.git\pythonConfig.vim
 autocmd BufNewFile,BufRead,BufEnter *nsi so ~\myVimFiles.git\nsis.vim
+autocmd BufNewFile,BufRead,BufEnter *php so ~\myVimFiles.git\php.vim
+autocmd BufNewFile,BufRead,BufEnter *html so ~\myVimFiles.git\php.vim
 autocmd BufNewFile,BufRead,BufEnter *txt call CheckLang()
 autocmd BufNewFile,BufRead,BufEnter *tmp call CheckLang()
 autocmd CursorHold * call UpdateColorScheme()
