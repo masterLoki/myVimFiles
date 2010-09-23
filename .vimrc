@@ -86,11 +86,13 @@ endfunction
 "Other Stuff {
 map <F2>  :!sh -login -i<CR><CR>
 map <F3>  :call SearchInFiles()<CR>
-map <F4>  :TlistToggle<CR>
+map <F4>  :TlistToggle<CR> "Taglist
+map <F11>   :YRShow()<CR> "Yankring
 imap <F2>  <ESC>:!sh -login -i<CR><CR>
-imap <F3>  <ESC>:call SearchInFiles()<CR> 
+imap <F3>  <ESC>:call SearchInFiles()<CR>  "Taglist
 imap <F4>  :TlistToggle<CR>
 imap <C-Space>  <C-x><C-o>
+imap <F11> <ESC>:YRShow()<CR> "Yankring
 "}
 "
 "FUF{

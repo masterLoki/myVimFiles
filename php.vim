@@ -7,7 +7,7 @@ endif
 function! MakeThisUrl()
   let s:url='http://localhost/'
   let s:url=s:url. expand('%')
-  exec ':!
+  return s:url
 endfunction
 
 function! MakeCustomUrl()
@@ -17,8 +17,8 @@ function! MakeCustomUrl()
 endfunction
 
 
-map <F9>  :w<CR>:!firefox -new-tab MakeThisUrl()<CR>
-map <F10>  :!firefox -new-tab call MakeCustomUrl()
-imap <F9>  <Esc>:w<CR>:!firefox -new-tab MakeThisUrl()<CR><CR>
-imap <F10>  <Esc>:!firefox -new-tab call MakeCustomUrl()
+map <F9>  :up<CR>:execute ":!firefox -new-tab ".MakeThisUrl()<CR>
+map <F10>  execute ":!firefox -new-tab ".MakeCustomUrl()
+imap <F9>  <Esc>:up<CR>:execute ":!firefox -new-tab ".MakeThisUrl()<CR>
+imap <F10>  <Esc>execute ":!firefox -new-tab ".MakeCustomUrl()
 
