@@ -53,7 +53,6 @@ map <A-S-l> <C-w>>
 "}
 
 "Filetype assoc{
-autocmd BufRead,BufNewFile * let b:start_time=localtime()
 autocmd BufRead,BufNewFile * set foldmethod=indent
 autocmd BufWinEnter *.* silent loadview
 autocmd BufWinLeave *.* mkview!
@@ -63,7 +62,7 @@ autocmd BufNewFile,BufRead,BufEnter *php so ~\myVimFiles.git\php.vim
 autocmd BufNewFile,BufRead,BufEnter *html so ~\myVimFiles.git\php.vim
 autocmd BufNewFile,BufRead,BufEnter *txt call CheckLang()
 autocmd BufNewFile,BufRead,BufEnter *tmp call CheckLang()
-autocmd CursorHold * call UpdateColorScheme()
+autocmd WinEnter * call SetTimeOfDayColors()
 "}
 
 "My search in files function
@@ -143,11 +142,4 @@ function SetTimeOfDayColors()
     execute "colorscheme " . colorScheme
 endfunction
 
-function UpdateColorScheme()
-  if ((localtime() - b:start_time) >= 100)
-    set statusline=%<%f\ %h%m%r%=%-20.(line=%l,col=%c%V,totlin=%L%)\%h%m%r%=%-40(,bytval=0x%B,%n%Y%)\ %{strftime(\"%c\")}%=0x%B\ %P
-    set statusline+=\ %{SetTimeOfDayColors()}
-    let b:start_time=localtime()
-  endif
-endfunction
 "}
