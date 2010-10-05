@@ -16,6 +16,7 @@ set ignorecase
 set smartcase
 set hidden
 set enc=utf-8
+set ff=unix "We save Unix Style
 syntax on
 filetype plugin indent on
 "}
@@ -86,12 +87,12 @@ endfunction
 map <F2>  :!sh -login -i<CR><CR>
 map <F3>  :call SearchInFiles()<CR>
 map <F4>  :TlistToggle<CR> "Taglist
-map <F11>   :YRShow()<CR> "Yankring
+map <F12>   :YRShow<CR> "Yankring
 imap <F2>  <ESC>:!sh -login -i<CR><CR>
 imap <F3>  <ESC>:call SearchInFiles()<CR>  "Taglist
 imap <F4>  :TlistToggle<CR>
 imap <C-Space>  <C-x><C-o>
-imap <F11> <ESC>:YRShow()<CR> "Yankring
+imap <F12> <ESC>:YRShow<CR> "Yankring
 "}
 "
 "FUF{

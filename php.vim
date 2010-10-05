@@ -2,6 +2,7 @@
 if !exists("g:addPath")
   let g:addPath = 1
   let $PATH=$PATH.';C:\Program Files\Mozilla Firefox'
+  let $PATH=$PATH.';C:\Program Files (x86)\Mozilla Firefox'
 endif 
 
 function! MakeThisUrl()
