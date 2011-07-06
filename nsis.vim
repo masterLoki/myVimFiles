@@ -1,5 +1,10 @@
 "NSIS config
 
+if !exists("g:NSISaddPath")
+  let g:NSISaddPath = 1
+  let $PATH=$PATH.';C:\Program Files (x86)\NSIS'
+endif 
+
 if !exists("g:outName")
   let g:outName=input("Input name of out file :: ")
 endif

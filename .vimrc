@@ -17,6 +17,7 @@ set smartcase
 set hidden
 set enc=utf-8
 set ff=unix "We save Unix Style
+set laststatus=2
 syntax on
 filetype plugin indent on
 "}
@@ -51,6 +52,10 @@ map <A-S-k> <C-w>-
 map <A-S-j> <C-w>+
 map <A-S-h> <C-w><
 map <A-S-l> <C-w>>
+"}
+
+"Statusline for GIT{
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 "}
 
 "Filetype assoc{
@@ -140,9 +145,16 @@ function SetTimeOfDayColors()
     elseif currentHour < 18 + 0
       let colorScheme = "proton"
     else
-      let colorScheme = "twilight"
+      let colorScheme = "desert"
     endif
     execute "colorscheme " . colorScheme
 endfunction
+
+"}
+
+"Finally cygwin zsh shell
+"{
+
+"set shell=C:/cygwin/bin/zsh
 
 "}
